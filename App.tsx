@@ -1,20 +1,24 @@
+import { Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { styled } from 'nativewind';
+import { useFonts } from 'expo-font';
+
+const StyledView = styled(View)
+const StyledText = styled(Text)
 
 export default function App() {
+  const [isFontsLoaded] = useFonts({
+    'Bolt': require('./src/assets/fonts/BoltRounded.otf'),
+    'FinkHeavy': require('./src/assets/fonts/FinkHeavy.otf'),
+    'Monsieur': require('./src/assets/fonts/Monsieur.otf'),
+  });
+
+  if(!isFontsLoaded) return;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <StyledView className="flex-1 items-center justify-center bg-white ">
+      <StyledText className='text-sm font-monsieur'>Open up App.tsx to start working on your app!</StyledText>
       <StatusBar style="auto" />
-    </View>
+    </StyledView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
